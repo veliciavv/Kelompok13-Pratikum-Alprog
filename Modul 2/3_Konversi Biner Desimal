@@ -1,0 +1,241 @@
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+void judul();
+void kelompok();
+void menu();
+void akhir();
+void hitung_desbin(int bil);
+void htiung_bindes(long long bil);
+
+int utama, hasil, biner, pilih, utama, biner, bobot, desimal, sisa, bil;
+
+void judul(){
+	printf("\t ________________________________________________ \n");
+	printf("\t|                                                |\n");
+	printf("\t|   -- PROGRAM  KONVERSI  DESIMAL  &  BINER --   |\n");
+	printf("\t|             K E L O M P O K   1 3              |\n");
+	printf("\t|________________________________________________|\n");
+}
+
+void kelompok(){
+	printf("\t ________________________________________________ \n");
+	printf("\t|                                                |\n");
+	printf("\t| 2105551023 - I Ketut Putra Jaya                |\n");
+	printf("\t| 2105551052 - Kadek Cahyadi Yogachandra         |\n");
+	printf("\t| 2105551102 - Dyah Putri Maheswari              |\n");
+	printf("\t| 2105551104 - Velicia Varrel Valiant            |\n");
+	printf("\t| 2105551105 - Greace Amanda Roose Yeimo         |\n");
+	printf("\t| 2105551125 - A.A. Sagung Mirah Indira Wardhana |\n");
+	printf("\t|________________________________________________|\n");
+	
+}
+
+void menu(){
+	
+	system("color 0B");
+	judul();
+	kelompok();
+	
+	printf("\t ________________________________________________ \n");
+	printf("\t|                                                |\n");
+	printf("\t|      1. Konversi Biner ke Desimal              |\n");
+	printf("\t|                                                |\n");
+	printf("\t|      2. Konversi Desimal ke Biner              |\n");
+	printf("\t|                                                |\n");
+	printf("\t|      3. Keluar                                 |\n");
+	printf("\t|________________________________________________|\n\n");
+	
+}
+
+float validasi(){
+    char ch;
+    char * data;
+    int vlds = 0;
+    data = (char *) malloc(sizeof(char));
+
+    while ((ch = getch()) != 13){
+        if ((ch >= '0' && ch <= '9')|| (ch == '.')){
+            printf("%c", ch);
+            data[vlds] = ch;
+            vlds++;
+        }
+    }
+    data[vlds] = '\0';
+    return atof(data);
+}
+
+void hitung_bindes(long long bil){
+ int hasil = 0, i = 0, perdigit;
+    while (bil!=0){
+        perdigit = bil%10;
+        bil /= 10;
+        hasil += perdigit*pow(2,i);
+        ++i;
+    }
+    printf(" adalah : %d", hasil);
+	printf("\n\t -------------------------------------------------\n");
+}
+
+char* concat(const char *s1, const char *s2);
+
+void hitung_desbin(int bil){
+    char temp[1];
+    char *hasil = "";
+    int i;
+    while(bil > 0){
+        i = bil%2;
+        if(i == 1){
+            sprintf(temp,"%d",i);
+            bil -= 1;
+        }
+        else if(i == 0){
+            sprintf(temp,"%d",i);
+        }
+        hasil = concat(temp,hasil);
+        bil /= 2;
+    }
+    printf(" adalah : %s", hasil);
+	printf("\n\t -------------------------------------------------\n");
+}
+
+int clean(){
+	while(getchar() != '\n');
+	return 1;
+}
+
+int binInput(){
+//	input2:
+	long long inputbin;
+	int len;
+	int i = 0;
+	char cekbin[256];
+	int enterCheck;
+    fflush(stdin);
+    system("cls");
+	system("COLOR 0E");
+	judul();
+		
+	printf("\n\t Bilangan biner yang ingin di konversi: ");
+    while(((scanf(" %lld%c", &inputbin, &enterCheck)) != 2 || enterCheck != '\n')&& clean() ){
+	        printf("\n\t -- Maaf pilihan yang anda masukkan tidak valid --\n");
+	        while(getchar() != '\n');
+	        printf("Masukkan bilangan biner anda : ");
+	}
+
+    //cek binary
+    sprintf(cekbin, "%lld", inputbin);
+    len = strlen(cekbin);
+    while( i < len){
+        if(cekbin[i] > '1' || cekbin[i] < '0'){
+            printf("\n\t -- Maaf pilihan yang anda masukkan tidak valid --\n");
+            getch();
+            inputbin = 0;
+//            goto input2;
+			binInput();
+        }
+        i++;
+    }
+    printf("\n\n\t -------------------------------------------------");
+	printf("\n\t Hasil konversi biner %lld", inputbin);
+    hitung_bindes(inputbin);
+    
+    akhir();
+}
+
+int desInput(){
+	int input;
+	int enterCheck;
+    fflush(stdin);
+    system("cls");
+	system("COLOR 0E");
+	judul();
+		
+	printf("\n\t Bilangan desimal yang ingin di konversi: ");
+    if(((scanf(" %d%c", &input, &enterCheck)) != 2 || enterCheck != '\n')&& clean() || input < 0){
+		        printf("Masukkan Bilangan yang Valid");
+		        while(getchar() != '\n');
+		        desInput();
+	}else{
+	printf("\n\n\t -------------------------------------------------");
+	printf("\n\t Hasil konversi desimal %d", input);
+    hitung_desbin(input);
+	
+	akhir();
+    }	
+}
+
+int main(){
+    int input, option, i=0, len;
+    long long inputbin;
+    char cekbin[256];
+    int ulang = 1;
+	int enterCheck;
+	
+    menu();
+    printf("\t  Masukkan menu yang ingin dipilih : ");
+	utama = validasi();
+	if (utama == 1){
+		binInput();
+	}else if (utama == 2){
+		desInput();
+	}else if (utama == 3){
+		printf("\n\t ________________________________________________ \n");
+		printf("\t|                                                |\n");
+		printf("\t|     - - T  E  R  I  M  A  K  A  S  I  H - -    |\n");
+		printf("\t|________________________________________________|\n\n");
+	}else {
+		system("cls");
+		printf ("\n\t -- Maaf pilihan yang anda masukkan tidak valid --\n");
+		main();
+	}
+	
+}
+
+char* concat(const char *s1, const char *s2){
+    char *result = malloc(strlen(s1)+strlen(s2)+1);
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
+}
+
+int validasiInt(int *var){
+	char buff[1024];
+	char cek;
+
+	if (fgets(buff, sizeof(buff), stdin) !=NULL) {
+		if (sscanf(buff, "%d %c", var, &cek) ==1){
+			return 1;
+		}
+	}
+	return 0;
+}
+
+void akhir(){
+	printf("\n\t ________________________________________________ \n");
+	printf("\t|                                                |\n");
+	printf("\t|    Apakah anda ingin mengulang program ini?    |\n");
+	printf("\t|________________________________________________|\n\n");
+	printf("\t           1. Ya               2. Tidak           \n");
+	
+	printf("\n\n\t          Masukkan pilihan Anda : ");
+	pilih = validasi();
+	if (pilih == 1){
+		system("cls");
+		main();
+	}else if (pilih == 2){
+		printf("\n\n\t ________________________________________________ \n");
+		printf("\t|                                                |\n");
+		printf("\t|   - -   T  E  R  I  M  A  K  A  S  I  H   - -  |\n");
+		printf("\t|________________________________________________|\n\n");
+	//	return;
+	}else {
+		system("cls");
+		judul();
+		akhir();
+		printf ("\n\n\t -- Maaf pilihan yang anda masukkan tidak valid --\n");
+	}
+}
