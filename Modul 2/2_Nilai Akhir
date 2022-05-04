@@ -1,0 +1,275 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <conio.h>
+
+void judul();
+void menu();
+void menu();
+float validasi();
+void salah();
+void akhir();
+
+void judul(){
+//	system("cls");
+	printf("\t ________________________________________________ \n");
+	printf("\t|                                                |\n");
+	printf("\t|        PROGRAM PENGHITUNGAN NILAI AKHIR        |\n");
+	printf("\t|             K E L O M P O K   1 3              |\n");
+	printf("\t|________________________________________________|\n");
+}
+
+void kelompok(){
+	printf("\t ________________________________________________ \n");
+	printf("\t|                                                |\n");
+	printf("\t| 2105551023 - I Ketut Putra Jaya                |\n");
+	printf("\t| 2105551052 - Kadek Cahyadi Yogachandra         |\n");
+	printf("\t| 2105551102 - Dyah Putri Maheswari              |\n");
+	printf("\t| 2105551104 - Velicia Varrel Valiant            |\n");
+	printf("\t| 2105551105 - Greace Amanda Roose Yeimo         |\n");
+	printf("\t| 2105551125 - A.A. Sagung Mirah Indira Wardhana |\n");
+	printf("\t|________________________________________________|\n");
+	
+}
+
+float validasi(){
+    char ch;
+    char * data;
+    int vlds = 0;
+    data = (char *) malloc(sizeof(char));
+
+    while ((ch = getch()) != 13){
+        if ((ch >= '0' && ch <= '9')|| (ch == '.')){
+            printf("%c", ch);
+            data[vlds] = ch;
+            vlds++;
+        }
+    }
+    data[vlds] = '\0';
+    return atof(data);
+}
+
+void menu(){
+	int utama;
+	
+	system("color 0F");
+	judul();
+	kelompok();
+	
+	printf("\t ________________________________________________ \n");
+	printf("\t|                                                |\n");
+	printf("\t|      1. Hitung Nilai Akhir                     |\n");
+	printf("\t|                                                |\n");
+	printf("\t|      2. Keluar                                 |\n");
+	printf("\t|________________________________________________|\n\n");
+	
+	printf("\t  Masukkan menu yang ingin dipilih : ");
+	utama = validasi();
+	if (utama == 1){
+		system("cls");
+		nilai();
+	}else if (utama == 2){
+		printf("\n\t ________________________________________________ \n");
+		printf("\t|                                                |\n");
+		printf("\t|     - - T  E  R  I  M  A  K  A  S  I  H - -    |\n");
+		printf("\t|________________________________________________|\n\n");
+	}else {
+		system("cls");
+		printf ("\n\t -- Maaf pilihan yang anda masukkan tidak valid --\n");
+		menu();
+	}
+}
+
+void salah(){
+	printf("\n\n\t  -- Maaf nilai yang anda masukkan tidak valid --\n");
+	printf("\t Mohon masukkan angka dengan rentang nilai 0 - 100 ");
+	sleep(2);
+    system("cls");
+}
+
+void nilai(){
+	int hadir, pilih, reset;
+	float tgs1, tgs2, tgs3, quiz, uts, uas;
+	float nilai_kehadiran, nilai_tugas, nilai_quiz, nilai_uts, nilai_uas, nilai_akhir;
+	
+	// jumlah kehadiran
+	do{
+        system("cls");
+		system("color 0E");
+        judul();
+		printf("\n\t Masukkan jumlah kehadiran anda: ");
+		hadir = validasi();
+		if(hadir > 15 || hadir < 0){
+			printf("\n\n\t -- Maaf jumlah yang anda masukkan tidak valid --\n");
+			printf("\t Mohon masukkan angka dengan rentang nilai 0 - 15 ");
+            sleep(2);
+            system("cls");
+            reset = 0 ;
+        } else {
+            reset = 1;
+        }
+    } while (reset == 0);
+	
+	// nilai tugas 1
+	do{
+		system("cls");
+		system("color 03");
+		judul();
+		printf("\n\t Masukkan nilai tugas pertama anda : ");
+		tgs1 = validasi();
+		if(tgs1 > 100 || tgs1 < 0){
+			salah();
+			reset = 0;
+		} else {
+			reset = 1;
+		}
+	} while (reset == 0);
+    
+	// nilai tugas 2
+	do{
+		system("cls");
+		system("color 03");
+		judul();
+		printf("\n\t Masukkan nilai tugas kedua anda : ");
+		tgs2 = validasi();
+		if(tgs2 > 100 || tgs2 < 0){
+			salah();
+			reset = 0;
+		} else {
+			reset = 1;
+		}
+	} while (reset == 0);
+	
+	// nilai tugas 3
+	do{
+		system("cls");
+		system("color 03");
+		judul();
+		printf("\n\t Masukkan nilai tugas ketiga anda : ");
+		tgs3 = validasi();
+		if(tgs3 > 100 || tgs3 < 0){
+			salah();
+			reset = 0;
+		} else {
+			reset = 1;
+		}
+	} while (reset == 0);	
+	
+	// nilai quiz
+	do{
+		system("cls");
+		system("color 0A");
+		judul();
+		printf("\n\t Masukkan nilai quiz anda : ");
+		quiz = validasi();
+		if(quiz > 100 || quiz < 0){
+			salah();
+			reset = 0;
+		} else {
+			reset = 1;
+		}
+	} while (reset == 0);	
+	
+	// nilai UTS
+	do{
+		system("cls");
+		system("color 0B");
+		judul();
+		printf("\n\t Masukkan nilai UTS anda : ");
+		uts = validasi();
+		if(uts > 100 || uts < 0){
+			salah();
+			reset = 0;
+		} else {
+			reset = 1;
+		}
+	} while (reset == 0);
+	
+	// nilai UAS	
+	do{
+		system("cls");
+		system("color 0C");
+		judul();
+		printf("\n\t Masukkan nilai UAS anda : ");
+		uas = validasi();
+		if(uas > 100 || uas < 0){
+			salah();
+			reset = 0;
+		} else {
+			reset = 1;
+		}
+	} while (reset == 0);
+	
+	// Hitung bobot masing-masing nilai
+    nilai_kehadiran = (hadir/15) * 100 * 0.05;
+    nilai_tugas = ((tgs1 + tgs2 + tgs3) / 3) * 0.20;
+    nilai_quiz = quiz * 0.15;
+    nilai_uts = uts * 0.30;
+    nilai_uas = uas * 0.30;
+    nilai_akhir = nilai_kehadiran + nilai_tugas + nilai_quiz + nilai_uts + nilai_uas;
+	
+	//output nilai angka
+	system("cls");
+	system("color 8F");
+	judul();
+	printf("\n\t        ------------------------------------\n");
+	printf("\t             Nilai akhir anda adalah %2.f   \n", nilai_akhir);
+	printf("\t        ------------------------------------\n");
+	
+	
+	
+	//output nilai huruf
+	if (nilai_akhir >= 80 && nilai_akhir <= 100){
+        printf("\t               Indeks Nilai Huruf = A ");
+    }else if (nilai_akhir >= 75 && nilai_akhir < 80){
+        printf("\t               Indeks Nilai Huruf = B+ ");
+	}else if (nilai_akhir >= 65 && nilai_akhir < 75){
+        printf("\t               Indeks Nilai Huruf = B ");
+    }else if (nilai_akhir >= 60 && nilai_akhir < 65){
+        printf("\t               Indeks Nilai Huruf = C+ ");
+	}else if (nilai_akhir >= 55 && nilai_akhir < 60){
+        printf("\t               Indeks Nilai Huruf = C ");
+    }else if (nilai_akhir >= 50 && nilai_akhir < 55){
+        printf("\t               Indeks Nilai Huruf = D+ ");
+	}else if (nilai_akhir >= 45 && nilai_akhir < 50){
+        printf("\t               Indeks Nilai Huruf = E+ ");
+    }else if (nilai_akhir >= 0 && nilai_akhir <45){
+        printf("\t               Indeks Nilai Huruf = E ");
+	}
+	
+	printf("\n\t        ------------------------------------\n\n");
+		
+	akhir();
+}
+
+int main(){
+	menu();
+	return 0;
+}
+
+void akhir(){
+	int pilih;
+	printf("\t ________________________________________________ \n");
+	printf("\t|                                                |\n");
+	printf("\t|    Apakah anda ingin mengulang program ini?    |\n");
+	printf("\t|________________________________________________|\n\n");
+	printf("\t           1. Ya               2. Tidak           \n");
+	
+	printf("\n\n\t          Masukkan pilihan Anda : ");
+	pilih = validasi();
+	if (pilih == 1){
+		system("cls");
+		main();
+	}else if (pilih == 2){
+		printf("\n\n\t ________________________________________________ \n");
+		printf("\t|                                                |\n");
+		printf("\t|   - -   T  E  R  I  M  A  K  A  S  I  H   - -  |\n");
+		printf("\t|________________________________________________|\n\n");
+		return;
+	}else {
+		system("cls");
+		judul();
+		printf ("\n\t -- Maaf pilihan yang anda masukkan tidak valid --\n");
+		akhir();
+	}
+}
